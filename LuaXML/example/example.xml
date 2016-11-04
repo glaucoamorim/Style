@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<pessoas teste="info">
+  <pessoa tipo="F" sangue="A">
+    <nome sobrenome="fdfdfd">Manoel</nome>
+    <cidade>Palmas-TO</cidade>
+  </pessoa>
+  <pessoa tipo="M" sangue="B">
+    <nome sobrenome="zxzxzx">Glauco</nome>
+    <cidade>Niteroi-RJ</cidade>
+  </pessoa>
+  <pessoa tipo="M" sangue="AB">
+    <nome sobrenome="qwqwq">Lira</nome>
+    <cidade>Brasilia-DF</cidade>
+  </pessoa>
+  <pessoa tipo="M" sangue="A">
+    <nome sobrenome="popop">Miguel</nome>
+    <cidade>Niteroi-RJ</cidade>
+  </pessoa>  
+</pessoas>
