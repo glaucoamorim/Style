@@ -73,6 +73,72 @@ end
 
 xmlhandler.root.ncl.body.media[countMedias+1] = newmedia
 
+
+xmlhandler.root.ncl.body.link={}
+countMedias = 0
+index = 0
+for k, p in pairs(xmlhandler.root.ncl.body.media) do
+  if(p._attr.id ~= "mlua") then
+    countMedias = countMedias + 1
+    index = index + 1
+    local newLinkOnBegin = {}
+    local newLinkOnStop = {}
+    
+    newLinkOnBegin._attr = {xconnector = "onBeginStart"}
+    newLinkOnBegin.bind = {}
+    bindOnBegin = {_attr = {role = "onBegin", component=p._attr.id}}
+    newLinkOnBegin.bind[1] = bindOnBegin
+    bindOnBegin = {_attr = {role = "start", component="mlua", interface="arj"..countMedias}}
+    newLinkOnBegin.bind[2] = bindOnBegin
+    xmlhandler.root.ncl.body.link[index] = newLinkOnBegin
+    
+    index = index + 1
+    newLinkOnStop._attr = {xconnector = "onEndStop"}
+    newLinkOnStop.bind = {}
+    bindOnBegin = {_attr = {role = "onEnd", component=p._attr.id}}
+    newLinkOnStop.bind[1] = bindOnBegin
+    bindOnBegin = {_attr = {role = "stop", component="mlua", interface="arj"..countMedias}}
+    newLinkOnStop.bind[2] = bindOnBegin
+    xmlhandler.root.ncl.body.link[index] = newLinkOnStop
+  else
+    tableAux = p.property
+    res = showTable(p.property)
+    print(res)
+    for k, p in pairs(tableAux) do
+      index = index + 1
+      local newLinkGetSet = {}
+      local bindGetSetParam = {}
+      newLinkGetSet._attr = {xconnector = "para"}
+      newLinkGetSet.bind = {}
+      bindGetSet = {_attr = {role = "onEndAttribution", component="mlua", interface=p._attr.name}}
+      newLinkGetSet.bind[1] = bindGetSet
+      bindGetSet = {_attr = {role = "get", component="mlua", interface=p._attr.name}}
+      newLinkGetSet.bind[2] = bindGetSet
+      bindGetSet = {_attr = {role = "set", component=xmlhandler.root.ncl.body.media[k]._attr.id, interface="location"}, bindParam = {_attr = {name = "var", value = "$get"}}}
+      newLinkGetSet.bind[3] = bindGetSet
+      xmlhandler.root.ncl.body.link[index] = newLinkGetSet
+      res = showTable(newLinkGetSet)  
+      print(res)
+    end
+  end
+end
+
+
+-------------------Definicao dos links-----------------------------------------
+--xmlhandler.root.ncl.body.link={}
+--countMedias = 0
+--local newLink = {}
+--newLink._attr = {xconnector = "onBeginStart"}
+--newLink.bind = {}
+--for k, p in pairs(xmlhandler.root.ncl.body.media) do
+  --countMedias = countMedias + 1
+  --newLink.bind[1] = {_attr = {role = "onBegin", component=p._attr.id}}
+  --newLink.bind[2] = {_attr = {role = "start", component="mlua", interface="arj"..countMedias}}
+  --xmlhandler.root.ncl.body.link[countMedias] = newLink
+--end
+
+-------------------------------------------------------------------------------
+
 --qtd_list = #(xmlhandler.root.pessoas.pessoa)
 --print(qtd_list)
 
