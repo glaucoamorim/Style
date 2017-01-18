@@ -1,23 +1,24 @@
 <ncl>
     <head>
         <regionBase>
-            <region id='rrj' top='0'  left='0' width='240' height='135'/>
-            <region id='rpr' top='0'  left='0' width='160' height='90'/>
-            <region id='rtr' top='0'  left='0' width='80' height='53'/>
-            <region id='rtmp' bottom='0'  right='0' width='30' height='30'/>
+			<region id='fundo'>
+            	<region id='rrj' top='0'  left='0' width='240' height='135'/>
+            	<region id='rpr' top='0'  left='0' width='160' height='90'/>
+            	<region id='rtr' top='0'  left='0' width='80' height='53'/>
+			</region>
         </regionBase>
         
         <descriptorBase>
-            <descriptor id='drj' region='rrj' explicitDur='6s'>
+			<descriptor id='dFundo' region='fundo'/>
+            <descriptor id='drj' region='rrj' explicitDur='11s'>
                 <descriptorParam name='soundLevel' value='0'/>
             </descriptor>
-            <descriptor id='dpr' region='rpr' explicitDur='6s'>
+            <descriptor id='dpr' region='rpr' explicitDur='11s'>
                 <descriptorParam name='soundLevel' value='0'/>
             </descriptor>
-            <descriptor id='dtr' region='rtr' explicitDur='6s'>
+            <descriptor id='dtr' region='rtr' explicitDur='11s'>
                 <descriptorParam name='soundLevel' value='0'/>
             </descriptor>
-            <descriptor id='dtmp' region='rtmp' explicitDur='12s'/>
         </descriptorBase>
         
         <connectorBase>
@@ -65,7 +66,7 @@
     <body>
         <port id='p1' component='mlua'/>
         <port id='p2' component='imgRJ'/>
-        <port id='p5' component='temp'/>
+        <port id='p5' component='fundo'/>
 
         <media id='mlua' src='foo.lua'>
             <area id='arj'/>
@@ -90,7 +91,7 @@
             <property name='location'/>
         </media>
         
-        <media id='temp' src='pin.png' descriptor='dtmp'/>
+        <media id='fundo' src='MapaRio4Pin.png' descriptor='dFundo'/>
         
         <link xconnector='delayedStart'>
             <bind role='onBegin' component='imgRJ'/>

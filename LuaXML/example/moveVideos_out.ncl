@@ -1,120 +1,120 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
   <ncl id="moveVideos" xmlns="http://www.ncl.org.br/NCL3.0/EDTVProfile">
-    <head>
-      <templateBase>
-        <importBase documenturi="/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/StyleTemplateEx1.xml" alias="mVideos"></importBase>
-      </templateBase>
-    </head>
     <body xtemplate="mVideos">
-          <media xlabel="video" layout="mVideos#videos" src="video.mp4" id="video1">
+        <link xconnector="onBeginStart">
+            <bind component="video1" role="onBegin">
+
+            </bind>
+            <bind interface="area1" component="mlua" role="start">
+
+            </bind>
+        </link>
+        <link xconnector="onEndStop">
+            <bind component="video1" role="onEnd">
+
+            </bind>
+            <bind interface="area1" component="mlua" role="stop">
+
+            </bind>
+        </link>
+        <link xconnector="onBeginStart">
+            <bind component="video2" role="onBegin">
+
+            </bind>
+            <bind interface="area2" component="mlua" role="start">
+
+            </bind>
+        </link>
+        <link xconnector="onEndStop">
+            <bind component="video2" role="onEnd">
+
+            </bind>
+            <bind interface="area2" component="mlua" role="stop">
+
+            </bind>
+        </link>
+        <link xconnector="onBeginStart">
+            <bind component="video3" role="onBegin">
+
+            </bind>
+            <bind interface="area3" component="mlua" role="start">
+
+            </bind>
+        </link>
+        <link xconnector="onEndStop">
+            <bind component="video3" role="onEnd">
+
+            </bind>
+            <bind interface="area3" component="mlua" role="stop">
+
+            </bind>
+        </link>
+        <link xconnector="para">
+            <bind interface="loc1" component="mlua" role="onEndAttribution">
+
+            </bind>
+            <bind interface="loc1" component="mlua" role="get">
+
+            </bind>
+            <bind interface="location" component="video1" role="set">
+              <bindParam value="$get" name="var"></bindParam>
+            </bind>
+        </link>
+        <link xconnector="para">
+            <bind interface="loc2" component="mlua" role="onEndAttribution">
+
+            </bind>
+            <bind interface="loc2" component="mlua" role="get">
+
+            </bind>
+            <bind interface="location" component="video2" role="set">
+              <bindParam value="$get" name="var"></bindParam>
+            </bind>
+        </link>
+        <link xconnector="para">
+            <bind interface="loc3" component="mlua" role="onEndAttribution">
+
+            </bind>
+            <bind interface="loc3" component="mlua" role="get">
+
+            </bind>
+            <bind interface="location" component="video3" role="set">
+              <bindParam value="$get" name="var"></bindParam>
+            </bind>
+        </link>
+          <media layout="mVideos#videos" xlabel="video" id="video1" src="video.mp4">
             <property name="location"></property>
           </media>
-          <media xlabel="video" layout="mVideos#videos" src="video2.mp4" id="video2">
+          <media layout="mVideos#videos" xlabel="video" id="video2" src="video2.mp4">
             <property name="location"></property>
           </media>
-          <media xlabel="video" layout="mVideos#videos" src="video3.mp4" id="video3">
+          <media layout="mVideos#videos" xlabel="video" id="video3" src="video3.mp4">
             <property name="location"></property>
           </media>
-          <media id="mlua" src="foo.lua">
-              <area id="arj1">
+          <media src="foo.lua" id="mlua">
+              <property name="loc1">
 
-              </area>
-              <area id="arj2">
+              </property>
+              <property name="loc2">
 
-              </area>
-              <area id="arj3">
+              </property>
+              <property name="loc3">
 
-              </area>
-                <property name="loc1">
+              </property>
+                <area id="area1">
 
-                </property>
-                <property name="loc2">
+                </area>
+                <area id="area2">
 
-                </property>
-                <property name="loc3">
+                </area>
+                <area id="area3">
 
-                </property>
+                </area>
           </media>
-            <link xconnector="onBeginStart">
-                <bind component="video1" role="onBegin">
-
-                </bind>
-                <bind component="mlua" role="start" interface="arj1">
-
-                </bind>
-            </link>
-            <link xconnector="onEndStop">
-                <bind component="video1" role="onEnd">
-
-                </bind>
-                <bind component="mlua" role="stop" interface="arj1">
-
-                </bind>
-            </link>
-            <link xconnector="onBeginStart">
-                <bind component="video2" role="onBegin">
-
-                </bind>
-                <bind component="mlua" role="start" interface="arj2">
-
-                </bind>
-            </link>
-            <link xconnector="onEndStop">
-                <bind component="video2" role="onEnd">
-
-                </bind>
-                <bind component="mlua" role="stop" interface="arj2">
-
-                </bind>
-            </link>
-            <link xconnector="onBeginStart">
-                <bind component="video3" role="onBegin">
-
-                </bind>
-                <bind component="mlua" role="start" interface="arj3">
-
-                </bind>
-            </link>
-            <link xconnector="onEndStop">
-                <bind component="video3" role="onEnd">
-
-                </bind>
-                <bind component="mlua" role="stop" interface="arj3">
-
-                </bind>
-            </link>
-            <link xconnector="para">
-                <bind component="mlua" role="onEndAttribution" interface="loc1">
-
-                </bind>
-                <bind component="mlua" role="get" interface="loc1">
-
-                </bind>
-                <bind component="video1" role="set" interface="location">
-                  <bindParam name="var" value="$get"></bindParam>
-                </bind>
-            </link>
-            <link xconnector="para">
-                <bind component="mlua" role="onEndAttribution" interface="loc2">
-
-                </bind>
-                <bind component="mlua" role="get" interface="loc2">
-
-                </bind>
-                <bind component="video2" role="set" interface="location">
-                  <bindParam name="var" value="$get"></bindParam>
-                </bind>
-            </link>
-            <link xconnector="para">
-                <bind component="mlua" role="onEndAttribution" interface="loc3">
-
-                </bind>
-                <bind component="mlua" role="get" interface="loc3">
-
-                </bind>
-                <bind component="video3" role="set" interface="location">
-                  <bindParam name="var" value="$get"></bindParam>
-                </bind>
-            </link>
     </body>
+    <head>
+        <templateBase>
+          <importBase documenturi="/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/StyleTemplateEx1.xml" alias="mVideos"></importBase>
+        </templateBase>
+    </head>
   </ncl>

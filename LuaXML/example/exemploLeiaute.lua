@@ -1,7 +1,8 @@
 #!/usr/bin/env lua
 
-dofile("../xml.lua")
-dofile("../handler.lua")
+dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/xml.lua")
+dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/handler.lua")
+dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/tableToXML.lua")
 
 ---Recursivelly prints a table
 --@param tb The table to be printed
@@ -20,7 +21,7 @@ function printable(tb, level)
   end  
 end
 
-local filename = "exemploLayout.xml"
+local filename = "/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/example/exemploLayout.xml"
 local xmltext = ""
 local f, e = io.open(filename, "r")
 if f then
@@ -39,6 +40,8 @@ xmlparser:parse(xmltext)
 
 --Recursivelly prints the table
 --printable(xmlhandler.root)
+res = showTable(xmlhandler.root.layout.body.container)
+print(res)
 
 --Manually prints the table (once that the XML structure for this example is previously known)
 for k, p in pairs(xmlhandler.root.layout.body.container) do
