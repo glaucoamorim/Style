@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+  <pessoas teste="info">
+              <pessoa sangue="A" tipo="F">
+                      <nome sobrenome="fdfdfd"></nome>
+          <cidade>Palmas-TO</cidade>
+        </pessoa>
+        <pessoa sangue="B" tipo="M">
+                      <nome sobrenome="zxzxzx"></nome>
+          <cidade>Niteroi-RJ</cidade>
+        </pessoa>
+        <pessoa sangue="AB" tipo="M">
+                      <nome sobrenome="qwqwq"></nome>
+          <cidade>Brasilia-DF</cidade>
+        </pessoa>
+        <pessoa sangue="A" tipo="M">
+                      <nome sobrenome="popop"></nome>
+          <cidade>Niteroi-RJ</cidade>
+        </pessoa>
+        <pessoa sangue="B" tipo="F">
+          <nome>Myrna</nome>
+          <cidade>Volta Redonda</cidade>
+        </pessoa>
+  </pessoas>

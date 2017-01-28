@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xt:xtemplate id="moveVideo" description="Example 1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xt="http://www.midiacom.uff.br/gtvd/XTemplate30/XTemplateENCL"
+	xsi:schemaLocation="http://www.midiacom.uff.br/gtvd/XTemplate30/XTemplateENCL http://www.midiacom.uff.br/gtvd/XTemplate30/profiles/XTPENCL.xsd">
+
+<head>
+	<connectorBase>
+		<importBase alias="connectors" documentURI="connectorBase.ncl"/>
+	</connectorBase>
+	<descriptorBase>
+		<importBase alias="descriptors" documentURI="descriptorBase.ncl"/>
+	</descriptorBase>
+</head>
+
+<vocabulary>
+    <component xlabel="video" descriptor="descriptors#dp_video">
+		<port xlabel="location"/>
+	</component>
+	
+	<component xlabel="lua" xtype="application/x-ginga-NCLua" minOccurs="1" maxOccurs="1" descriptor="descriptors#dp_lua">
+    	<port xlabel="l_area"/>
+    	<port xlabel="l_property"/>
+    </component>
+	
+</vocabulary>
+
+<body>
+	<port id="port" foreach="child::*[@xlabel='video'][position()=1]"/>
+	<port id="port" select="child::*[@xlabel='lua'][position()=1]"/>
+	
+	<media id="temp" src="pin.png" descriptor="dtmp"/>
+        
+	<media id="mlua" src="foo.lua" type="application/x-ginga-NCLua" xlabel="lua">
+		<area id="area" xlabel="l_area" foreach="child::*[@xlabel='video']" />
+		<property id="property" foreach="child::*[@xlabel='video']" xlabel="l_property"/>
+	</media>
+</body>
+
+</xt:xtemplate>

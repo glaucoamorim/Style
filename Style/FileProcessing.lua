@@ -1,11 +1,11 @@
 #!/usr/bin/env lua
 ---Sample application to read a XML file and print it on the terminal.
 --@author Manoel Campos da Silva Filho - http://manoelcampos.com
-
-dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/xml.lua")
-dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/handler.lua")
-dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/tableToXML.lua")
---dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/createsScriptLua.lua")
+--require("processor")
+dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/xml.lua")
+dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/handler.lua")
+dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/tableToXML.lua")
+--dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/createsScriptLua.lua")
 
 ---Recursivelly prints a table
 --@param tb The table to be printed
@@ -58,9 +58,6 @@ function createsMediaLua(xml, count)
   end
 
   xml.root.ncl.body.media[count+1] = newmedia
-  
-  res = showTable(layout)
-  print(res)
   
   return xml, count, layout
 end
@@ -116,9 +113,9 @@ function createsLinks(xml)
 end
 
 function main()
-  local filename_in = "/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/example/moveVideos.ncl"
-  local filename_out = "/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/example/moveVideos_out.ncl"
-  local filename_style = "/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/LuaXML/example/exemploLayout.xml"
+  local filename_in = "/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/example/moveVideos.ncl"
+  local filename_out = "/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/example/moveVideos_out.ncl"
+  local filename_style = "/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/example/exemploSimpleLayout.xml"
   --local filename_in = arg[1]
   --local filename_out = arg[2]
   local xmltextNCL = ""
@@ -141,6 +138,9 @@ function main()
   --Instantiate the object that parses the XML to a Lua table
   local xmlparserNCL = xmlParser(xmlhandlerNCL)
   xmlparserNCL:parse(xmltextNCL)
+  
+  res = showTable(xmlhandlerNCL.root)
+  print(res)
 
   xmlhandlerNCL, countMedias = createsProperties(xmlhandlerNCL, countMedias)
   xmlhandlerNCL, countMedias, layoutTable = createsMediaLua(xmlhandlerNCL, countMedias)
@@ -167,6 +167,9 @@ function main()
 
   res = showTable(xmlhandlerStyle.root)
   print(res)
+  
+  --proc = processor:new()
+  --proc:process(xmlhandlerNCL, xmlhandlerStyle)
   --createsScript(layoutTable)
 end
 

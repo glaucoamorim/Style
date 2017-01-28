@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<layout id="LayoutAppExample">
+  <head>
+    <constraintConnectorBase>
+	   <importBase alias="const" documentURI="constraint.xml"/>
+    </constraintConnectorBase>
+  </head>
+  <body>
+    <container id="menu" type="gridLayout" focusIndex="1">
+      <format top="0" left="0" width="120" height="240" columns="1" rows="4" vspace="0" hspace="0"/>
+    </container>
+		
+    <container id="videos" type="flowLayout" focusIndex="1">
+      <format top="0" left="140" width="860" height="100" hspace="20" align="center"/>
+      <item id="item1" width="200" height="100"/>
+    </container>
+  </body>
+</layout>
