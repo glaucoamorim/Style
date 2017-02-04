@@ -5,7 +5,7 @@
 dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/xml.lua")
 dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/handler.lua")
 dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/tableToXML.lua")
---dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/createsScriptLua.lua")
+dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/createsScriptLua.lua")
 
 ---Recursivelly prints a table
 --@param tb The table to be printed
@@ -122,7 +122,8 @@ function main()
   local xmltextStyle = "" 
   local f, e = io.open(filename_in, "r")
   local countMedias = 0
-  local layoutTable = {}
+  local layoutTableMedia = nil
+  local layoutTableProc = nil
 
   if f then
     --Gets the entire file content and stores into a string
@@ -143,7 +144,7 @@ function main()
   print(res)
 
   xmlhandlerNCL, countMedias = createsProperties(xmlhandlerNCL, countMedias)
-  xmlhandlerNCL, countMedias, layoutTable = createsMediaLua(xmlhandlerNCL, countMedias)
+  xmlhandlerNCL, countMedias, layoutTableMedia = createsMediaLua(xmlhandlerNCL, countMedias)
   xmlhandlerNCL = createsLinks(xmlhandlerNCL)
 
   writeToXml(xmlhandlerNCL.root, filename_out)
@@ -168,9 +169,10 @@ function main()
   res = showTable(xmlhandlerStyle.root)
   print(res)
   
-  --proc = processor:new()
-  --proc:process(xmlhandlerNCL, xmlhandlerStyle)
-  --createsScript(layoutTable)
+  proc = Processor:new()
+  proc:process(xmlhandlerNCL, xmlhandlerStyle)
+  layoutTableProc = proc
+  createsScript(layoutTableMedia, layoutTableProc)
 end
 
 main()

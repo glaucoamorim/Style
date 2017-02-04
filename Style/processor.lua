@@ -3,7 +3,7 @@ require('grid')
 require('carousel')
 require('stack')
 
-Processor = {flow = {}, grid = {}, carousel= {}, stack = {}}
+Processor = {flow = {}, grid = {}, carousel= {}, stack = {}, untype = {}, itens = {}}
 
 function Processor:new(o)
   o = o or {}
