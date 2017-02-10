@@ -7,7 +7,5 @@
 	</head>
 	<body xtemplate="mVideos">
 		<media id="video1" src="video.mp4" xlabel="video" layout="mVideos#videos" item="item1"/>
-    <media id="video2" src="video2.mp4" xlabel="video" layout="mVideos#videos" item="item2"/>
-    <media id="video3" src="video3.mp4" xlabel="video" layout="mVideos#videos" item="item1"/>
 	</body>
 </ncl>

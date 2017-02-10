@@ -1,17 +1,15 @@
 Flow = {  id = "",
-          focusIndex = "",
-          top = "",
-          left = "",
-          bottom = "",
-          right = "",
-          width = "",
-          height = "",
-          hspace = "",
-          vspace = "",
-          align = "", 
-          itemId = "",
-          itemWidth = "",
-          itemHeight = "",
+          focusIndex = 0,
+          top = 0,
+          left = 0,
+          bottom = 0,
+          right = 0,
+          width = 0,
+          height = 0,
+          hspace = 0,
+          vspace = 0,
+          align = "center",
+          itens = {},
           medias = {}}
         
 function Flow:new(o)
@@ -61,20 +59,12 @@ function Flow:setAlign(newAlign)
   self.align = newAlign
 end
 
-function Flow:setItemId(newItemId)
-  self.itemId = newItemId
+function Flow:setItem(newItem)
+  self.itens = newItem
 end
 
-function Flow:setItemWidth(newItemWidth)
-  self.itemWidth = newItemWidth
-end
-
-function Flow:setItemHeight(newItemHeight)
-  self.itemHeight = newItemHeight
-end
-
-function Flow:setMedia(newMedia, index)
-  self.medias[index] = newMedia
+function Flow:setMedia(newMedia)
+  self.medias = newMedia
 end
 
 function Flow:getId()
@@ -117,14 +107,14 @@ function Flow:getAlign()
   return self.align
 end
 
-function Flow:getItemId()
-  return self.itemId
+function Flow:getItemId(index)
+  return self.itens[index].id
 end
 
-function Flow:getItemWidth()
-  return self.itemWidth
+function Flow:getItemWidth(index)
+  return self.itens[index].width
 end
 
-function Flow:getItemHeight()
-  return self.itemHeight
+function Flow:getItemHeight(index)
+  return self.itens[index].height
 end

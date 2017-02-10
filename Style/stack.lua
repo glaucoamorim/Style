@@ -1,18 +1,17 @@
 Stack = {  id = "",
-          focusIndex = "",
-          top = "",
-          left = "",
-          bottom = "",
-          right = "",
-          width = "",
-          height = "",
-          zIndex = "",
+          focusIndex = 0,
+          top = 0,
+          left = 0,
+          bottom = 0,
+          right = 0,
+          width = 0,
+          height = 0,
+          zIndex = 0,
           orientation = "",
-          align = "",
-          step = "",
-          itemId = "",
-          itemWidth = "",
-          itemHeight = ""}
+          align = "center",
+          step = 0,
+          itens = {},
+          medias = {}}
         
 function Stack:new(o)
   o = o or {}
@@ -65,16 +64,12 @@ function Stack:setStep(newStep)
   self.step = newStep
 end
 
-function Stack:setItemId(newItemId)
-  self.itemId = newItemId
+function Stack:setItem(newItem)
+  self.itens = newItem
 end
 
-function Stack:setItemWidth(newItemWidth)
-  self.itemWidth = newItemWidth
-end
-
-function Stack:setItemHeight(newItemHeight)
-  self.itemHeight = newItemHeight
+function Stack:setMedia(newMedia, index)
+  self.medias[index] = newMedia
 end
 
 function Stack:getId()
@@ -121,14 +116,14 @@ function Stack:getStep()
   return self.step
 end
 
-function Stack:getItemId()
-  return self.itemId
+function Stack:getItemId(index)
+  return self.itens[index].id
 end
 
-function Stack:getItemWidth()
-  return self.itemWidth
+function Stack:getItemWidth(index)
+  return self.itens[index].width
 end
 
-function Stack:getItemHeight()
-  return self.itemHeight
+function Stack:getItemHeight(index)
+  return self.itens[index].height
 end

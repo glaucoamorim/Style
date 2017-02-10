@@ -1,14 +1,13 @@
 Carousel = {  id = "",
-          focusIndex = "",
-          top = "",
-          left = "",
-          bottom = "",
-          right = "",
-          width = "",
-          height = "",
-          itemId = "",
-          itemWidth = "",
-          itemHeight = ""}
+          focusIndex = 0,
+          top = 0,
+          left = 0,
+          bottom = 0,
+          right = 0,
+          width = 0,
+          height = 0,
+          itens = {},
+          medias = {}}
         
 function Carousel:new(o)
   o = o or {}
@@ -45,16 +44,12 @@ function Carousel:setHeight(newHeight)
   self.height = newHeight
 end
 
-function Carousel:setItemId(newItemId)
-  self.itemId = newItemId
+function Carousel:setItem(newItem)
+  self.itens = newItem
 end
 
-function Carousel:setItemWidth(newItemWidth)
-  self.itemWidth = newItemWidth
-end
-
-function Carousel:setItemHeight(newItemHeight)
-  self.itemHeight = newItemHeight
+function Carousel:setMedia(newMedia, index)
+  self.medias[index] = newMedia
 end
 
 function Carousel:getId()
@@ -85,14 +80,14 @@ function Carousel:getHeight()
   return self.height
 end
 
-function Carousel:getItemId()
-  return self.itemId
+function Carousel:getItemId(index)
+  return self.itens[index].id
 end
 
-function Carousel:getItemWidth()
-  return self.itemWidth
+function Carousel:getItemWidth(index)
+  return self.itens[index].width
 end
 
-function Carousel:getItemHeight()
-  return self.itemHeight
+function Carousel:getItemHeight(index)
+  return self.itens[index].height
 end

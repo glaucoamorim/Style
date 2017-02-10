@@ -2,17 +2,17 @@
   <ncl id="moveVideos" xmlns="http://www.ncl.org.br/NCL3.0/EDTVProfile">
     <head>
       <templateBase>
-        <importBase documenturi="/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/StyleTemplateEx1.xml" alias="mVideos"></importBase>
+        <importBase alias="mVideos" documenturi="/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/StyleTemplateEx1.xml"></importBase>
       </templateBase>
     </head>
     <body xtemplate="mVideos">
-          <media id="video1" layout="mVideos#videos" src="video.mp4" xlabel="video">
+          <media src="video.mp4" item="item1" layout="mVideos#videos" xlabel="video" id="video1">
             <property name="location"></property>
           </media>
-          <media id="video2" layout="mVideos#videos" src="video2.mp4" xlabel="video">
+          <media src="video2.mp4" item="item2" layout="mVideos#videos" xlabel="video" id="video2">
             <property name="location"></property>
           </media>
-          <media id="video3" layout="mVideos#videos" src="video3.mp4" xlabel="video">
+          <media src="video3.mp4" item="item1" layout="mVideos#videos" xlabel="video" id="video3">
             <property name="location"></property>
           </media>
           <media id="mlua" src="foo.lua">

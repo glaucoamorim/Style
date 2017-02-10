@@ -43,47 +43,37 @@ end
 
 function getValues()
 	smt.mark_backtrack(m)
-	if layout.video1.value then
-		smt.assert(m, f1.oc)
-	else
-		smt.assert(m, smt.lnot(f1.oc))
-	end
-
-	if layout.video2.value then
-		smt.assert(m, f2.oc)
-	else
-		smt.assert(m, smt.lnot(f2.oc))
-	end
-
-	if layout.video3.value then
-		smt.assert(m, f3.oc)
-	else
-		smt.assert(m, smt.lnot(f3.oc))
-	end
-
+if auxLayP.flow[1].medias[1].value then
+	smt.assert(m, flow_video1.oc)
+else
+	smt.assert(m, smt.lnot(fflow_video1.oc))
+if auxLayP.flow[2].medias[2].value then
+	smt.assert(m, flow_video2.oc)
+else
+	smt.assert(m, smt.lnot(fflow_video2.oc))
+if auxLayP.flow[3].medias[3].value then
+	smt.assert(m, flow_video3.oc)
+else
+	smt.assert(m, smt.lnot(fflow_video3.oc))
 	print(m:check())
-
-	if layout.video1.value then
-		m:eval(f1)
-		layout.video1.position = tostring(f1.xi.value) .. ',' .. tostring(f1.yi.value)
-		print(layout.video1.position)
-		criaEvt(layout.video1.prop,layout.video1.position)
-	end
-
-	if layout.video2.value then
-		m:eval(f2)
-		layout.video2.position = tostring(f2.xi.value) .. ',' .. tostring(f2.yi.value)
-		print(layout.video2.position)
-		criaEvt(layout.video2.prop,layout.video2.position)
-	end
-
-	if layout.video3.value then
-		m:eval(f3)
-		layout.video3.position = tostring(f3.xi.value) .. ',' .. tostring(f3.yi.value)
-		print(layout.video3.position)
-		criaEvt(layout.video3.prop,layout.video3.position)
-	end
-
+if auxLayP.flow[1].medias[1].value then
+	m:eval(flow_video1)
+	auxLayP.flow[1].medias[1].position = tostring(flow_video1.xi.value) .. ',' .. tostring(flow_video1.yi.value)
+	print(auxLayP.flow[1].medias[1].position)
+	criaEvt(auxLayP.flow[1].medias[1].prop,auxLayP.flow[1].medias[1].position)
+end
+if auxLayP.flow[2].medias[2].value then
+	m:eval(flow_video2)
+	auxLayP.flow[2].medias[2].position = tostring(flow_video2.xi.value) .. ',' .. tostring(flow_video2.yi.value)
+	print(auxLayP.flow[2].medias[2].position)
+	criaEvt(auxLayP.flow[2].medias[2].prop,auxLayP.flow[2].medias[2].position)
+end
+if auxLayP.flow[3].medias[3].value then
+	m:eval(flow_video3)
+	auxLayP.flow[3].medias[3].position = tostring(flow_video3.xi.value) .. ',' .. tostring(flow_video3.yi.value)
+	print(auxLayP.flow[3].medias[3].position)
+	criaEvt(auxLayP.flow[3].medias[3].prop,auxLayP.flow[3].medias[3].position)
+end
 	smt.backtrack(m)
 end
 
@@ -95,43 +85,20 @@ function handler(evt)
 			m = model:new()
 			m:init_document()
 
-			f1 = m:new_item{x_size = 240, y_size = 135}
-			f2 = m:new_item{x_size = 160, y_size = 90}
-			f3 = m:new_item{x_size = 80, y_size = 53}
-
-			local flow_canvas = {
-				name = "flow_canvas",
-				x_init = 0,
-				x_size = 600,
-				y_init = 0,
-				y_size = 400}
-			flow_canvas = m:flow(flow_canvas,
-						{f1,f2,f3},
-						10, 10,
-						model.FLOW_ALIGN.CENTER,
-						model.FLOW_ALIGN.CENTER,
-						model.FLOW_ALIGN.CENTER)
-		else
-			m:end_document()
-		end
-	else
-		info_media = evt.label:split(.)
-		id_media = info_media[1]
-		layout[id_media].value = (evt.action == 'start')
-		getValues()
-	end
-end
-
 function printer(e)
-	print('\n\n')
-	print('\t\tclass : ' .. tostring(e.class))
-	print('\t\ttype : ' .. tostring(e.type))
-	print('\t\taction : ' .. tostring(e.action))
-	print('\t\tlabel : ' .. tostring(e.label))
-	print('\t\tarea : ' .. tostring(e.area))
-	print('\t\tname : ' .. tostring(e.name))
-	print('\t\tvalue : ' .. tostring(e.value))
-	print('\n\n')
+	print('
+
+')
+	print('		class : ' .. tostring(e.class))
+	print('		type : ' .. tostring(e.type))
+	print('		action : ' .. tostring(e.action))
+	print('		label : ' .. tostring(e.label))
+	print('		area : ' .. tostring(e.area))
+	print('		name : ' .. tostring(e.name))
+	print('		value : ' .. tostring(e.value))
+	print('
+
+')
 end
 
 event.register(printer)

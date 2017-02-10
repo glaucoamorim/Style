@@ -1,11 +1,12 @@
 #!/usr/bin/env lua
 ---Sample application to read a XML file and print it on the terminal.
 --@author Manoel Campos da Silva Filho - http://manoelcampos.com
---require("processor")
+require("processor")
+require("createsScriptLua")
 dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/xml.lua")
 dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/handler.lua")
 dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/tableToXML.lua")
-dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/createsScriptLua.lua")
+--dofile("/Users/glaucoamorim/Documents/DoutoradoUFF/Projetos/Style/ExemploGlauco/Style/createsScriptLua.lua")
 
 ---Recursivelly prints a table
 --@param tb The table to be printed
@@ -24,7 +25,22 @@ function printable(tb, level)
   end  
 end
 
---Manually prints the table (once that the XML structure for this example is previously known)
+
+--Recursivelly makes a table copy
+--@param t table to be copied
+function table.copy(t)
+  local u = { }
+  for k, v in pairs(t) do
+    if("table" ~= type(v))then
+         u[k] = v 
+    else
+        u[k] = table.copy(v)
+        end
+    end
+  return u
+end
+
+--Creates the location property in every media
 function createsProperties(xml, count)
   for k, p in pairs(xml.root.ncl.body.media) do
     count = count + 1
@@ -38,6 +54,7 @@ function createsProperties(xml, count)
 end
 
 
+--Creates the Lua node and layout table in NCL document
 function createsMediaLua(xml, count)
   local newmedia = {}
   newmedia._attr = {id = "mlua", src="foo.lua"}
@@ -62,6 +79,7 @@ function createsMediaLua(xml, count)
   return xml, count, layout
 end
 
+--Creates the links to manipulate the property values in the NCL document
 function createsLinks(xml)
   xml.root.ncl.body.link={}
   local countMedias = 0
@@ -119,8 +137,11 @@ function main()
   --local filename_in = arg[1]
   --local filename_out = arg[2]
   local xmltextNCL = ""
-  local xmltextStyle = "" 
+  local xmltextStyle = ""
+  local auxXmlTextNCL = ""
   local f, e = io.open(filename_in, "r")
+  local g, d = io.open(filename_style, "r")
+  local h, c = io.open(filename_in, "r")
   local countMedias = 0
   local layoutTableMedia = nil
   local layoutTableProc = nil
@@ -131,31 +152,48 @@ function main()
   else
     error(e)
   end
+  
+  if h then
+    --Gets the entire file content and stores into a string
+    auxXmlTextNCL = h:read("*a")
+  else
+    error(c)
+  end
 
   --Instantiate the object the states the XML file as a Lua table
   local xmlhandlerNCL = simpleTreeHandler()
+  local auxXmlHandlerNCL = simpleTreeHandler()
   --local xmlhandler = domHandler()
 
   --Instantiate the object that parses the XML to a Lua table
   local xmlparserNCL = xmlParser(xmlhandlerNCL)
   xmlparserNCL:parse(xmltextNCL)
   
-  res = showTable(xmlhandlerNCL.root)
-  print(res)
+  local auxXmlParserNCL = xmlParser(auxXmlHandlerNCL)
+  auxXmlParserNCL:parse(auxXmlTextNCL)
 
   xmlhandlerNCL, countMedias = createsProperties(xmlhandlerNCL, countMedias)
   xmlhandlerNCL, countMedias, layoutTableMedia = createsMediaLua(xmlhandlerNCL, countMedias)
   xmlhandlerNCL = createsLinks(xmlhandlerNCL)
-
   writeToXml(xmlhandlerNCL.root, filename_out)
+  
+  countMedias = 0
+  layoutTableMedia = nil
+  
+  auxXmlHandlerNCL, countMedias = createsProperties(auxXmlHandlerNCL, countMedias)
+  auxXmlHandlerNCL, countMedias, layoutTableMedia = createsMediaLua(auxXmlHandlerNCL, countMedias)
+  auxXmlHandlerNCL = createsLinks(auxXmlHandlerNCL)
+  
+  --res = showTable(auxXmlHandlerNCL)
+  --print(res)
 
-  f, e = io.open(filename_style, "r")
+  g, d = io.open(filename_style, "r")
 
-  if f then
+  if g then
     --Gets the entire file content and stores into a string
-    xmltextStyle = f:read("*a")
+    xmltextStyle = g:read("*a")
   else
-    error(e)
+    error(d)
   end
 
   --Instantiate the object the states the XML file as a Lua table
@@ -166,12 +204,13 @@ function main()
   local xmlparserStyle = xmlParser(xmlhandlerStyle)
   xmlparserStyle:parse(xmltextStyle)
 
-  res = showTable(xmlhandlerStyle.root)
-  print(res)
+  --res = showTable(xmlhandlerStyle.root)
+  --print(res)
   
   proc = Processor:new()
-  proc:process(xmlhandlerNCL, xmlhandlerStyle)
-  layoutTableProc = proc
+  layoutTableProc = proc:process(auxXmlHandlerNCL.root, xmlhandlerStyle.root)
+  --res = showTable(layoutTableProc)
+  --print(res)
   createsScript(layoutTableMedia, layoutTableProc)
 end
 

@@ -9,7 +9,9 @@ Grid = {  id = " ",
           hspace = 0,
           vspace = 0,
           columns = 0,
-          rows = 0}
+          rows = 0,
+          itens = {},
+          medias = {}}
         
 function Grid:new(o)
   o = o or {}
@@ -60,6 +62,10 @@ end
 
 function Grid:setRows(newRows)
   self.rows = newRows
+end
+
+function Grid:setMedia(newMedia, index)
+  self.medias[index] = newMedia
 end
 
 function Grid:getId()

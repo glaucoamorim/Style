@@ -199,7 +199,7 @@ function simpleTreeHandler()
     
     obj.root = {} 
     obj.stack = {obj.root;n=1}
-    obj.options = {noreduce = {}}
+    obj.options = {noreduce = {media = true, area = true, container = true, item = true}}
 
     obj.reduce = function(self,node,key,parent)
         -- Recursively remove redundant vectors for nodes
